@@ -24,7 +24,7 @@ GET /getclasses
   res -
     { classes: [class] }
 
-GET /getposts
+POST /getposts
 	req -
 		{ classname: String }
 	res -

@@ -15,7 +15,7 @@ var getclasses = function (req, res) {
         return res.json({ success: false, message: 'Found classes!', classes: docs.map(function(item) { return item.classname;} ) });
       }
     });
-
+		
 	});
 };
 
