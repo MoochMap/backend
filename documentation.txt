@@ -1,0 +1,51 @@
+POST /signup
+	req -
+		{ username: String, password: String }
+	res -
+		{ success: boolean, message: String }
+
+POST /login
+	req -
+		{ username: String, password: String }
+	res -
+		{ success: boolean, message: String, token: token }
+
+-- REQUIRES VERIFICATION --
+
+GET /getuser
+  req -
+    { _id: ObjectID }
+  res -
+    { user: user }
+
+GET /getclasses
+  req -
+    { NONE }
+  res -
+    { classes: [class] }
+
+GET /getposts
+	req -
+		{ classname: String }
+	res -
+		{ success: boolean, message: String, posts[post { title: String, description: String }] }
+
+POST /createpost
+	req -
+		{ classname: String, post: post { title: String , description: String } }
+	res -
+		{ success: boolean, message: String }
+
+-- REQUIRES ADMIN --
+
+POST /createclass
+  req -
+    { classname: String }
+  res -
+    { success: boolean, message: String }
+
+POST /deletepost
+	req -
+		{ postid: ObjectID }
+	res -
+		{ success: boolean, message: String }
