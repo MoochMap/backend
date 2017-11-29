@@ -1,6 +1,6 @@
 var MongoClient	= require('mongodb').MongoClient;
 var ObjectID    = require('mongodb').ObjectID;
-var config			= require('../../../config');
+var config			= require('../config');
 var url					= config.database;
 
 var getposts = function (req, res) {
