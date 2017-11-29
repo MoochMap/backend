@@ -2,6 +2,7 @@ var router		= require('express').Router();
 var auth			= require('./auth');
 var user			= require('./user');
 var classes 	= require('./class');
+var events 		= require('./events');
 var posts			= require('./post');
 
 router.get('/', (req,res) => {
@@ -19,17 +20,17 @@ router.use(auth.authenticate);
 
 router.get('/getuser', user.getuser);
 
-router.get('/getclasses', classes.getclasses);
+router.get('/getevents', events.getevents);
 
-router.post('/getposts', posts.getposts);
+router.post('/createevent', events.createevent);
 
-router.post('/createpost', posts.createpost);
+router.post('/followevent', events.followevent);
 
 //
 //	ADMIN
 //
 router.use(auth.isadmin);
 
-router.post('/createclass', classes.createclass);
+
 
 module.exports = router;

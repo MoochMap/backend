@@ -12,7 +12,7 @@ var getuser = function (req, res) {
 				return res.json({ success: false, message: "No user found" });
 			} else {
 				console.log(user);
-				return res.json({ success: true, message: "test", user: user });
+				return res.json({ success: true, message: "test", user: user, following: user.following });
 			}
 		});
 		//return res.json({ success: false, message: "No user found" });
@@ -21,6 +21,7 @@ var getuser = function (req, res) {
 
 var functions = {
 	getuser: getuser
+
 };
 
 module.exports = functions;

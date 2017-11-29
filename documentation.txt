@@ -36,6 +36,18 @@ POST /createpost
 	res -
 		{ success: boolean, message: String }
 
+POST /createevent
+	req -
+		{ name: String, description: String, Date: Date, Location: location }
+	res -
+		{ success: boolean, message: String }
+
+GET /getevents
+	req -
+		{ NONE }
+	res -
+		{ success: boolean, events: event[] }
+
 -- REQUIRES ADMIN --
 
 POST /createclass

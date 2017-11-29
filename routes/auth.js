@@ -8,9 +8,11 @@ var jwt					= require('jsonwebtoken');
 function createAccount(body, db, res) {
 	var collection = db.collection('users');
 	bcrypt.hash(body.password, 10, function (err, hash) {
+		var following = [];
 		var user = {
 			username: body.username,
 			password: hash,
+			following: following,
 			admin: false
 		};
 		collection.insert(user, function(err, result) {
