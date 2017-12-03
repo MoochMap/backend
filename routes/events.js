@@ -104,13 +104,15 @@ var followevent = function (req, res) {
 					if (!user) {
 						users.update(
             { _id: new ObjectID(req.decoded._id) },
-            { $push: { following: { "name": req.body.name } } }
+            { $push: { following: { "name": req.body.name } } },
+						{multi: true}
           	);
           	following = "Unfollow";
 					} else {
 						users.update(
             { _id: new ObjectID(req.decoded._id) },
-            { $pull: { following: { "name": req.body.name } } }
+            { $pull: { following: { "name": req.body.name } } },
+						{multi: true}
           	);
           	following = "Follow";
 					}
