@@ -1,6 +1,6 @@
 var MongoClient	= require('mongodb').MongoClient;
 var ObjectID    = require('mongodb').ObjectID;
-var bcrypt			= require('bcrypt');
+var bcrypt			= require('bcryptjs');
 var config			= require('../config');
 var url					= config.database;
 var jwt					= require('jsonwebtoken');
