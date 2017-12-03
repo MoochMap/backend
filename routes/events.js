@@ -85,6 +85,7 @@ var createevent = function (req, res) {
 };
 
 var followevent = function (req, res) {
+		consoole.log("WOAH" + req);
 	 MongoClient.connect(url, function(err, db) {
     var users = db.collection('users');
 		var following;
