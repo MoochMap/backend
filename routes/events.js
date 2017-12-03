@@ -14,7 +14,6 @@ var getevents = function (req, res) {
       if (docs.length === 0) {
         return res.json({ success: false, message: 'There aren\'t any events!' });
       } else {
-				console.log(docs);
         return res.json({ success: true, message: 'Found events!', events: docs });
       }
     });
@@ -29,8 +28,6 @@ var deleteevent = function (req, res) {
 
 
 		users.findOne({_id: new ObjectID(req.decoded._id) }, function (err, user) {
-				console.log("usernanem" + user.username + "eventcreator:");
-				console.log(req.body);
 				if (err || user.username != req.body.creator) {
 					return res.json({ success: false, message: "Failed to delete event!" });
 				}
@@ -88,7 +85,6 @@ var createevent = function (req, res) {
 };
 
 var followevent = function (req, res) {
-	console.log(req.body.name);
 	 MongoClient.connect(url, function(err, db) {
     var users = db.collection('users');
 		var following;
@@ -101,6 +97,7 @@ var followevent = function (req, res) {
 */
 				users.findOne({ $and: [{ _id: new ObjectID(req.decoded._id) }, { following: {$elemMatch: {name: name } } } ] }, function (err, user) {
 					if (err) {
+						console.log("Error updating follow status. \n");
 						return res.json({ success: false, message: "DB Error" });
 					}
 
@@ -117,6 +114,7 @@ var followevent = function (req, res) {
           	);
           	following = "Follow";
 					}
+					console.log("Updated Following " + following + " \n");
 					return res.json({ success: true, message: "Updated Following Status", following: following });
 				});
 
