@@ -11,10 +11,35 @@ var getevents = function (req, res) {
       if (docs.length === 0) {
         return res.json({ success: false, message: 'There aren\'t any events!' });
       } else {
-
-        return res.json({ success: false, message: 'Found events!', events: docs });
+				console.log(docs);
+        return res.json({ success: true, message: 'Found events!', events: docs });
       }
     });
+
+	});
+};
+
+var deleteevent = function (req, res) {
+	MongoClient.connect(url, function(err, db) {
+		var events = db.collection('events');
+		var users = db.collection('users');
+
+
+		users.findOne({_id: new ObjectID(req.decoded._id) }, function (err, user) {
+				console.log("usernanem" + user.username + "eventcreator:");
+				console.log(req.body);
+				if (err || user.username != req.body.creator) {
+					return res.json({ success: false, message: "Failed to delete event!" });
+				}
+				events.remove({name: req.body.name}, function(err, docs) {
+    	  if (docs.length === 0) {
+    	    return res.json({ success: false, message: 'There aren\'t any events!' });
+    	  } else {
+					console.log("DELETING EVENT");
+     	   return res.json({ success: true, message: 'Deleted event!'});
+    	  }
+    	});
+		});
 
 	});
 };
@@ -28,17 +53,16 @@ var createevent = function (req, res) {
 			if (err || !user) {
 				return res.json({ success: false, message: "No user found" });
 			} else {
-				if (!req.body.name || !req.body.type || !req.body.location || !req.body.description || !req.body.start || !req.body.end) {
+				if (!req.body.name || !req.body.type || !req.body.location || !req.body.description || !req.body.date) {
 					return res.json({ success: false, message: 'Please fill in all fields!' });
 				}
 				var event = {
 					name: req.body.name,
 					description: req.body.description,
-					locatiion: req.body.location,
-					creator: user,
+					location: req.body.location,
+					creator: user.username,
 					type: req.body.type,
-					start: req.body.start,
-					end: req.body.end
+					date: req.body.date
 				};
 
 				events.find({ name: event.name }).toArray( function(err, docs) {
@@ -102,7 +126,8 @@ var followevent = function (req, res) {
 var functions = {
 	getevents: getevents,
 	createevent: createevent,
-	followevent: followevent
+	followevent: followevent,
+	deleteevent: deleteevent
 };
 
 module.exports = functions;

@@ -48,6 +48,12 @@ GET /getevents
 	res -
 		{ success: boolean, events: event[] }
 
+		POST /deleteevent
+			req -
+				{ eventname: String, eventcreator: String }
+			res -
+				{ success: boolean, message: String }
+
 -- REQUIRES ADMIN --
 
 POST /createclass
@@ -55,9 +61,3 @@ POST /createclass
     { classname: String }
   res -
     { success: boolean, message: String }
-
-POST /deletepost
-	req -
-		{ postid: ObjectID }
-	res -
-		{ success: boolean, message: String }

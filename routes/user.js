@@ -12,7 +12,7 @@ var getuser = function (req, res) {
 				return res.json({ success: false, message: "No user found" });
 			} else {
 				console.log(user);
-				return res.json({ success: true, message: "test", user: user, following: user.following });
+				return res.json({ success: true, message: "test", username: user.username, following: user.following });
 			}
 		});
 		//return res.json({ success: false, message: "No user found" });

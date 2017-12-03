@@ -6,7 +6,7 @@ var events 		= require('./events');
 var posts			= require('./post');
 
 router.get('/', (req,res) => {
-	res.status(200).json({ message: 'Connected!'});
+	res.send({ message: 'Connected!'});
 });
 
 router.post('/signup', auth.signup);
@@ -15,6 +15,7 @@ router.post('/login', auth.login);
 //
 //	Protected Routes
 //
+
 
 router.use(auth.authenticate);
 
@@ -26,6 +27,7 @@ router.post('/createevent', events.createevent);
 
 router.post('/followevent', events.followevent);
 
+router.post('/deleteevent', events.deleteevent);
 //
 //	ADMIN
 //

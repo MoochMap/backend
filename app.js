@@ -1,6 +1,5 @@
 var express			= require('express');
 var app					= express();
-var port				= process.env.PORT || 5000;
 var cors				= require('cors');
 var bodyParser	= require('body-parser');
 var routes			= require('./routes');
@@ -11,5 +10,5 @@ app.use(cors());
 
 app.use('/', routes);
 
-app.listen(port);
-console.log("Server listening on port " + port);
+app.listen(process.env.PORT || 5000);
+console.log("Server listening on port 5000");
