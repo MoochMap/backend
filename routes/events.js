@@ -1,6 +1,9 @@
 var MongoClient	= require('mongodb').MongoClient;
 var ObjectID    = require('mongodb').ObjectID;
-var config			= require('../config');
+var config 			= {
+	database: process.env.database,
+	secret: 	process.env.secret
+}
 var url					= config.database;
 
 var getevents = function (req, res) {
@@ -99,8 +102,8 @@ var followevent = function (req, res) {
 				users.findOne({ $and: [{ _id: new ObjectID(req.decoded._id) }, { following: {$elemMatch: {name: name } } } ] }, function (err, user) {
 					if (err) {
 						return res.json({ success: false, message: "DB Error" });
-					}				
-	
+					}
+
 					if (!user) {
 						users.update(
             { _id: new ObjectID(req.decoded._id) },
@@ -117,8 +120,8 @@ var followevent = function (req, res) {
 					return res.json({ success: true, message: "Updated Following Status", following: following });
 				});
 
-//		});			
-			
+//		});
+
    });
 };
 

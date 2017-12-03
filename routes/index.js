@@ -1,7 +1,6 @@
 var router		= require('express').Router();
 var auth			= require('./auth');
 var user			= require('./user');
-var classes 	= require('./class');
 var events 		= require('./events');
 var posts			= require('./post');
 
